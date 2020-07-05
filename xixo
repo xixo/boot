@@ -1,0 +1,32 @@
+#!/usr/bin/env node
+
+const nodemon = require('nodemon');
+const {xixo} = require('@xixo/xixo');
+const path = require('path');
+
+(async () => {
+  const {packages} = await xixo('@xixo/boot');
+  const ignore = packages.map((pkg) => {
+    const config = pkg['@xixo/boot']
+
+    if (!config || !config.ignore) {
+      return;
+    }
+
+    return config.ignore.map((glob) => {
+      let absolute = glob;
+
+      if (!glob.startsWith('/')) {
+        absolute = path.join(pkg.__dirname, glob);
+      }
+
+      return absolute;
+    });
+  }).flat();
+
+  nodemon({
+    script: __dirname + '/boot.js',
+    ext: 'js ejs jsx json css scss',
+    ignore
+  });
+})();

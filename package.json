@@ -1,0 +1,14 @@
+{
+  "name": "@xixo/boot",
+  "version": "1.0.0",
+  "description": "boot your xixo",
+  "repository": "https://github.com/xixo/boot",
+  "license": "GPL-3.0",
+  "bin": {
+    "xixo": "./xixo"
+  },
+  "dependencies": {
+    "@xixo/xixo": "git://github.com/xixo/xixo.git",
+    "nodemon": "^2.0.4"
+  }
+}
